@@ -1,0 +1,6 @@
+@function randomNum($min, $max) {
+  $random: random();
+  $randomNum: $min + floor($random * (($max - $min) + 1));
+
+  @return $randomNum;
+}

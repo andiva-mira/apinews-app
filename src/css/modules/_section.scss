@@ -97,7 +97,7 @@
 		background-position: 0 100%;
 		background-repeat: no-repeat;
 		background-size: 100% 5px;
-		background-image: linear-gradient(to right, #9c7737 0%, #34495e 100%);
+		background-image: linear-gradient(to right, map-get($colors, primaryA) 0%,  map-get($colors, primaryB) 100%);
 		display: flex;
 		align-items: center;
 		padding: 20px 15px;
@@ -115,7 +115,7 @@
 			max-width: 90%;
 			word-wrap: break-word;
 			color:#34495e;
-			background: linear-gradient(135deg, #9c7737 0%,#34495e 100%);
+			background: linear-gradient(135deg, #{$gold} 0%, #{$blue} 100%);
 			-webkit-background-clip: text;
 			-webkit-text-fill-color: transparent;
 
@@ -164,10 +164,10 @@
 		line-height: 37px;
 		text-decoration: none;
 		text-transform: uppercase;
-		background-color: map-get($colors, blue);
+		background-color: map-get($colors, primaryB);
 		width: 140px;
 		border-radius: 20px;
-		border: 1px solid map-get($colors, blue);
+		border: 1px solid map-get($colors, primaryB);
 		padding: 0;
 		margin: 0;
 		text-align: center;
@@ -186,8 +186,8 @@
 			top: 0;
 			left: 0;
 			text-align: center;
-			background-color: #f3f3f3;
-			color: map-get($colors, blue);
+			background-color: map-get($colors, mainBg);;
+			color: map-get($colors, primaryB);
 			width: 100%;
 			line-height: 37px;
 			transition: all .6s ease-in;
@@ -197,7 +197,7 @@
 
 		&:hover {
 			background-position: 200% 50%;
-			border: 1px solid map-get($colors, gold);	
+			border: 1px solid map-get($colors, primaryA);	
 
 			&::after {
 				opacity: 1;
@@ -246,7 +246,7 @@
 
 		.title-container {
 			@include mq(lmedium) {
-				border-bottom-color: map-get($colors, gold);
+				border-bottom-color: map-get($colors, primaryA);
 				text-align: left;
 				order: 1;
 			}
@@ -254,7 +254,7 @@
 		}
 
 		.title {
-			color: map-get($colors, gold);
+			color: map-get($colors, primaryA);
 		}
 
 		.description {
@@ -276,11 +276,11 @@
 		}
 
 		.readmore {
-			background-color: map-get($colors, gold);
-			border: 1px solid map-get($colors, gold);
+			background-color: map-get($colors, primaryA);
+			border: 1px solid map-get($colors, primaryA);
 
 			&:hover {
-				border: 1px solid map-get($colors, gold);
+				border: 1px solid map-get($colors, primaryA);
 			}
 		}
 	}

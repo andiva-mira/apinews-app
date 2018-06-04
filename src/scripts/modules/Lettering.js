@@ -1,4 +1,4 @@
-export function lettering() {
+export function splitIntoLetters() {
 let stringArr = [];
 let letterArr = [];
 

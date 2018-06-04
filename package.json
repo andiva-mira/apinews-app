@@ -3,9 +3,17 @@
   "version": "1.0.0",
   "description": "",
   "main": "App.js",
+  "browserslist": [
+    "last 2 versions",
+    "safari >= 8",
+    "ie >= 10",
+    "ff >= 20",
+    "ios 6",
+    "android 4"
+  ],
   "scripts": {
-    "start": "webpack-dev-server --mode development --open --hot",
-    "build": "webpack --mode production"
+    "dev": "webpack-dev-server --mode development  --open --hot",
+    "build": "webpack   --mode production"
   },
   "author": "",
   "dependencies": {
@@ -19,11 +27,13 @@
     "babel-preset-env": "^1.7.0",
     "clean-webpack-plugin": "^0.1.19",
     "css-loader": "^0.28.11",
+    "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.4.0",
     "node-sass": "^4.9.0",
     "optimize-css-assets-webpack-plugin": "^4.0.2",
     "postcss-loader": "^2.1.5",
+    "postcss-preset-env": "^5.1.0",
     "sass-loader": "^7.0.1",
     "style-loader": "^0.21.0",
     "svg-url-loader": "^2.3.2",

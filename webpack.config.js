@@ -23,7 +23,12 @@ module.exports = {
 
     	}
       }), 
-      new OptimizeCSSAssetsPlugin({})
+      new OptimizeCSSAssetsPlugin({
+         assetNameRegExp: /\.css$/g,
+         cssProcessor: require('cssnano'),
+         cssProcessorOptions: { discardComments: { removeAll: true } },
+         canPrint: true
+      })
     ]
   	},
 
@@ -33,7 +38,8 @@ module.exports = {
 			template: './src/index.html'
 		}),
 	    new MiniCssExtractPlugin({
-	      filename: 'styles.[contenthash].css',
+	      filename: 'styles.[hash].css',
+	      chunkFilename: "[id].css"
 	    }),
 	],
 

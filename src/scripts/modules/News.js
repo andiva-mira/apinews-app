@@ -1,30 +1,30 @@
-export function newsCall() {
+export function newsApiCall() {
 
 	// DOM Elements
-var tab1 = document.getElementById('tab1');
-var tab2 = document.getElementById('tab2');
-var tab3 = document.getElementById('tab3');
-var tabs = document.querySelectorAll('.tabs');
-var section = document.getElementById('newsSection');
+const tab1 = document.getElementById('tab1');
+const tab2 = document.getElementById('tab2');
+const tab3 = document.getElementById('tab3');
+const tabs = document.querySelectorAll('.tabs');
+const section = document.getElementById('newsSection');
 
 
 // News API Data
-var apiKey = '22e8781300b74ae1b67d95e8d027d555';
-var guardUrl = 'https://newsapi.org/v2/top-headlines?sources=the-guardian-uk&apiKey=' + apiKey;
-var bbcNewsUrl = 'https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=' + apiKey;
-var reutersUrl = 'https://newsapi.org/v2/top-headlines?sources=reuters&apiKey=' + apiKey;
-var natGeoUrl = 'https://newsapi.org/v2/top-headlines?sources=national-geographic&apiKey=' + apiKey;
+const apiKey = '22e8781300b74ae1b67d95e8d027d555';
+const guardUrl = 'https://newsapi.org/v2/top-headlines?sources=the-guardian-uk&apiKey=' + apiKey;
+const bbcNewsUrl = 'https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=' + apiKey;
+const reutersUrl = 'https://newsapi.org/v2/top-headlines?sources=reuters&apiKey=' + apiKey;
+const natGeoUrl = 'https://newsapi.org/v2/top-headlines?sources=national-geographic&apiKey=' + apiKey;
 
 
 // Request News Function
 async function getNews(url) {
 	var response = await fetch(url);
 	if (response.ok) {
-		var jsonResponse = await response.json();
+		const jsonResponse = await response.json();
 		//console.log(jsonResponse);
 
 		// saving the first 10 articles from every object
-		var articlesArray = jsonResponse.articles.slice(0, 10);
+		const articlesArray = jsonResponse.articles.slice(0, 10);
 		console.log(articlesArray);
 		return articlesArray;
 	}

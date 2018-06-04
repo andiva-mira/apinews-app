@@ -1,6 +1,15 @@
+/********Themes********/
+//Allowed values:  Purple, Red
+$theme: Null;
+
+// default theme
+$gold: #9c7737;
+$blue: #34495e;
+
 $colors: (
-	gold: #9c7737,
-	blue: #34495e
+	mainBg: #f3f3f3,
+	primaryA: #9c7737,
+	primaryB: #34495e,
 );
 
 
