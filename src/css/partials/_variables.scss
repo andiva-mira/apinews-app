@@ -1,0 +1,23 @@
+/********Themes********/
+//Allowed values:  define theme colors
+$theme: Null;
+
+// default color theme
+$mainBg: #f3f3f3;
+$textColor: #777;
+$primaryA: #9c7737;
+$primaryB: #34495e;
+
+// fontface
+$fontSize: 1rem;
+$fontHeadings: 'Oswald', sans-serif;
+$fontContent: 'Source Sans Pro', sans-serif;
+
+// media query breakpoints
+$breakpoints: ( 
+	xsmall: 640px,
+	small: 768px,
+	medium: 992px,
+	lmedium: 1024px,
+	large: 1200px
+);

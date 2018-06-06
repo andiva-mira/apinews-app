@@ -1,6 +1,6 @@
 body {
 	margin: auto;
-	background-color: #f3f3f3;
+	background-color: $mainBg;
 }
 
 
@@ -10,15 +10,15 @@ a {
 }
 
 h1, h2, h3, h4, h5, h6 {
-	color: #34495e;
-	font-family: 'Oswald', sans-serif;
+	color: $primaryB;
+	font-family: $fontHeadings;
 }
 
 
 small, p {
-	color: #777;
-	font-family: 'Source Sans Pro', sans-serif;
-	font-size: 14px;
+	color: $textColor;
+	font-family: $fontContent;
+	font-size: $fontSize;
 	line-height: 1.05;
 	text-align: left;
 	padding: 5px;

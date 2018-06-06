@@ -1,7 +1,15 @@
-@import 'partials/config';
+@import 'partials/variables';
 @import 'partials/functions';
 @import 'partials/mixins';
 @import 'partials/base';
-@import 'modules/header';
-@import 'modules/section';
+@import 'components/header';
+@import 'components/page-title';
+@import 'components/header-animation';
+@import 'components/tabs';
+@import 'components/section';
+@import 'components/article-title';
+@import 'components/article-image';
+@import 'components/article';
+@import 'components/button';
+
 

@@ -1,12 +1,13 @@
+import lazySizes from 'lazysizes';
+
 export function newsApiCall() {
 
-	// DOM Elements
-const tab1 = document.getElementById('tab1');
-const tab2 = document.getElementById('tab2');
-const tab3 = document.getElementById('tab3');
-const tabs = document.querySelectorAll('.tabs');
+// DOM Elements
 const section = document.getElementById('newsSection');
+const tabsList = document.querySelectorAll('.tabs');
 
+// convert nodeList into array
+const tabsArr = [...tabsList];
 
 // News API Data
 const apiKey = '22e8781300b74ae1b67d95e8d027d555';
@@ -14,7 +15,7 @@ const guardUrl = 'https://newsapi.org/v2/top-headlines?sources=the-guardian-uk&a
 const bbcNewsUrl = 'https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=' + apiKey;
 const reutersUrl = 'https://newsapi.org/v2/top-headlines?sources=reuters&apiKey=' + apiKey;
 const natGeoUrl = 'https://newsapi.org/v2/top-headlines?sources=national-geographic&apiKey=' + apiKey;
-
+const newsUrls = [guardUrl, bbcNewsUrl, reutersUrl, natGeoUrl];
 
 // Request News Function
 async function getNews(url) {
@@ -33,105 +34,100 @@ async function getNews(url) {
 // Render News Function
 function renderNews(articles) {
 	articles.map((article, index) => {
-		const author = (article.author != null ) ? ('<small>By ' + article.author + '</small>') : ' ';
-		const description = (article.description != null ) ? ('<p> ' + article.description + '</p>') : ' ';
-		
-		const newsContent =
-			'<article class="article">' +
-				'<div class="news-content">' +
-					'<div class="title-container">' +
-						'<h2 class="title"><span class="quotes"></span>' + article.title + '</h2>' +
-					'</div>' +
-					'<div class="description">' +
-					author +
-					description +
-					'<a href="' + article.url + '" target="_blank" class="readmore"><span class="btn-text">Read More</span></a>' +
-					'</div>' +
-				'</div>' +
-				'<div class="image-container">' +
-					'<img class="image" src="' + article.urlToImage + '" />' +
-				'</div>' +
-			'</article>';
+
+		const formatDate = dateUtcInput => {
+			const months = ['January', 'February','March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+			const weekdays = ['Sunday','Monday','Tuesady','Wednesday','Thursday','Friday','Saturday'];
+			const utcDate = new Date(dateUtcInput);
+			const weekday = utcDate.getDay();
+			const day = utcDate.getDate();
+			const month = utcDate.getMonth();
+			const year = utcDate.getFullYear();
+			const dateStr = weekdays[weekday] + ', ' + day + ' ' + months[month] + ' ' + year;
+			const publishedDate = (dateUtcInput != null ) ? ('<small class="article-date">' + dateStr + '</small>') : ' ';
+			return publishedDate;
+		}
+
+		const author = (article.author != null ) ? `<small class="article-author">By ${article.author}</small>` : ' ';
+		const description = (article.description != null ) ? `<p>${article.description}</p>` : ' ';
+		const isNewsContentOdd = (index % 2 == 0) ? 'news-content--odd' : '';
+		const isButtonOdd = (index % 2 == 0) ? 'btn--odd' : '';
+
+			const newsContent =
+			`<article class="article">
+				<div class="news-content">
+					<div class="title-container">
+						<h2 class="title"><span class="quotes"></span>${article.title}</h2>
+					</div>
+					<div class="description">
+						${author}
+						${formatDate(article.publishedAt)}
+						${description}
+						<a href="${article.url} target="_blank" class="btn  ${isButtonOdd}"><span class="btn-text">Read More</span></a>
+					</div>
+				</div>
+				<div class="image-container">
+					<img class="image lazyload" data-src="${article.urlToImage}" />
+				</div>
+			</article>`;
 
 		section.innerHTML += newsContent;
 	});
+
 	return articles;
 }
+
 
 function displayNewsArticles(articlesArray) {
 	renderNews(articlesArray);
 }
 
 
-
 function displayFirstTabContent() {
+// clean content
 	section.innerHTML = ' ';
-	tab1.style.borderTop = "1px solid #9c7737";
-	getNews(guardUrl).then(displayNewsArticles);
-}
 
+// add active/non active classes
+	tabsArr.forEach((item, i) => {
+		if (i == 0 ) {
+			item.className = "tabs tab-is-active";
+		} else {
+			item.className = "tabs tab-is-not-active";
+		}
+	});
+	getNews(newsUrls[0]).then(displayNewsArticles);	
+}
 
 // display first tab content on window load
 window.onload = displayFirstTabContent();
 
-
-
 // Tabs Event Listeners
 
-tab1.addEventListener('click', function() {
-	// remove content
-	section.innerHTML = ' ';
+tabsArr.forEach((tab, tabIndex, tabArray) => {
+	
+	tab.addEventListener("click", function(event) {
+		// const tabAttr = tab.getAttribute("data-index");
+		// console.log(tabAttr);
+		
+		newsUrls.forEach((news, newsIndex) => {
+			
+			if ( newsIndex == tabIndex) {
+				// clean content
+				section.innerHTML = ' ';
 
-	// add top border to active tab 
-	this.style.borderTop = "1px solid #9c7737";
-	tab2.style.borderTop = 'transparent';
-	tab3.style.borderTop = 'transparent';
-	tab4.style.borderTop = 'transparent';
+				// set active to current tab
+				this.className = "tabs tab-is-active";
+				getNews(news).then(displayNewsArticles);
+			} 
 
-	// Call getNews() 
-	getNews(guardUrl).then(displayNewsArticles);
-}, false);
+			// if (tabAttr != newsIndex) {
+			// 	tabArray[tabIndex].className = "tabs tab-is-not-active";
+			// } 
 
-tab2.addEventListener('click', function() {
-	// remove content
-	section.innerHTML = ' ';
+		});
 
-	// add top border to active tab 
-	this.style.borderTop = "1px solid #9c7737";
-	tab1.style.borderTop = 'transparent';
-	tab3.style.borderTop = 'transparent';
-	tab4.style.borderTop = 'transparent';
+	}, false);
+});
 
-	// Call getNews() 
-	getNews(bbcNewsUrl).then(displayNewsArticles);
-}, false);
-
-tab3.addEventListener('click', function() {
-	// remove content
-	section.innerHTML = ' ';
-
-	// add top border to active tab 
-	this.style.borderTop = "1px solid #9c7737";
-	tab1.style.borderTop = 'transparent';
-	tab2.style.borderTop = 'transparent';
-	tab4.style.borderTop = 'transparent';
-
-	// Call getNews() 
-	getNews(reutersUrl).then(displayNewsArticles);
-}, false);
-
-tab4.addEventListener('click', function() {
-	// remove content
-	section.innerHTML = ' ';
-
-	// add top border to active tab 
-	this.style.borderTop = "1px solid #9c7737";
-	tab1.style.borderTop = 'transparent';
-	tab2.style.borderTop = 'transparent';
-	tab3.style.borderTop = 'transparent';
-
-	// Call getNews() 
-	getNews(natGeoUrl).then(displayNewsArticles);
-}, false);
 
 }

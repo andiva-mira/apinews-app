@@ -12,13 +12,14 @@
     "android 4"
   ],
   "scripts": {
-    "dev": "webpack-dev-server --mode development  --open --hot",
+    "dev": "webpack-dev-server --mode development  --open --watch",
     "build": "webpack   --mode production"
   },
   "author": "",
   "dependencies": {
     "babel-polyfill": "^6.26.0",
-    "jquery": "^3.3.1"
+    "jquery": "^3.3.1",
+    "lazysizes": "^4.0.2"
   },
   "devDependencies": {
     "autoprefixer": "^8.5.2",

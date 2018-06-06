@@ -1,0 +1,35 @@
+.news-tabs {
+	text-align: center;
+	margin-bottom: 20px;
+	@include flex-col;
+	
+	@include mq(medium) {
+		@include flex-row;
+	}
+
+	a {
+		font-family: $fontContent;
+		font-size: $fontSize*1.3;
+		line-height: 0.94;
+		letter-spacing: 3px;
+		text-align: center;
+		text-decoration: none;
+		color: darken($primaryB, 5);
+		padding: 5px;
+		text-transform: lowercase;
+
+		@include mq(xsmall) {
+			font-size: $fontSize*1.7;
+		}
+
+	}
+
+	.tab-is-active {
+		border-top: 1px solid $primaryA;
+	}
+
+	.tab-is-not-active {
+		border-top-color: transparent;
+	}
+
+}
