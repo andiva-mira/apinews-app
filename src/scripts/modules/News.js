@@ -108,7 +108,7 @@ tabsArr.forEach((tab, tabIndex, tabArray) => {
 	tab.addEventListener("click", function(event) {
 		// const tabAttr = tab.getAttribute("data-index");
 		// console.log(tabAttr);
-		
+		const currentTab = this;
 		newsUrls.forEach((news, newsIndex) => {
 			
 			if ( newsIndex == tabIndex) {
@@ -116,7 +116,7 @@ tabsArr.forEach((tab, tabIndex, tabArray) => {
 				section.innerHTML = ' ';
 
 				// set active to current tab
-				this.className = "tabs tab-is-active";
+				currentTab.className = "tabs tab-is-active";
 				getNews(news).then(displayNewsArticles);
 			} 
 
@@ -126,8 +126,7 @@ tabsArr.forEach((tab, tabIndex, tabArray) => {
 
 		});
 
-	}, false);
-});
-
+		}, false);
+	});
 
 }

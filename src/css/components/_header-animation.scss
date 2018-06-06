@@ -43,13 +43,13 @@
 }
 
 .char {
-	color: lighten($primaryB, 40);
+	color: lighten($primaryB, 30);
 	display: block;
 	width: 30px;
 	height: 30px;
 
 	&:nth-child(even) {
-	color: lighten($primaryA, 30);
+	color: lighten($primaryA, 20);
 	}
 }
 
@@ -59,7 +59,7 @@
 	height: 5px;
 
 	&:nth-child(even) {
-	border-bottom-color: lighten($primaryB, 40);
+	border-bottom-color: lighten($primaryB, 30);
 	}
 }
 

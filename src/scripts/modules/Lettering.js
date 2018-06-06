@@ -1,51 +1,51 @@
-export function splitIntoLetters() {
-	let stringArr = [];
-	let letterArr = [];
-	const _el = document.querySelectorAll(".el");
-
-	// convert nodeList into array
-	//const arr = [].slice.call(_el);
-	const arr = [... _el];
-	let strings;
-	let letters;
-	let wrappedLetters;
-
-	//console.log(arr);
+class SplitIntoLetters {
 	
-	for (let i = 0;  i < arr.length; i++) {	
+	constructor(elements) {
+		this.elList = document.querySelectorAll(elements);
+		// convert nodelist into array
+		this.elArr = [...this.elList];
+		this.stringArr = [];
+		this.letterArr = [];
+		this.strings = "";
+		this.letters = "";
+		this.wrappedLetters = "";
+		this.lettering();
+	}
 
-		// add indexed based class to every element
-		arr[i].className += `  el--${i + 1}`;
-	 	strings = arr[i].innerHTML;
+	lettering() {
 
-	 	// split words into letters
-	 	//letters = strings.split('');
-	 	letters = [...strings];	 
+		for (let i = 0; i < this.elArr.length; i++) {
 
-	 	// clean pushed elements from nested array 
-		letterArr = [];
-		for (let j=0; j<letters.length; j++) {
-			if (letters[j] != " ") { 
-				// wrap with span tag and  add class
-				wrappedLetters = `<span class='char char-${j + 1}'> ${letters[j]} </span> `;
-				letterArr.push(wrappedLetters);	
-			} else {
-				wrappedLetters =  `<span class='char char-space'> ${letters[j]} </span> `;
-				letterArr.push(wrappedLetters);	
+			// add indexed based class to every element
+			this.elArr[i].className += `  el--${i + 1}`;
+			this.strings = this.elArr[i].innerHTML;
+
+			// split words into letters
+			//this.letters = this.strings.split('');
+			this.letters = [...this.strings];
+
+			// clean pushed elements from nested array 
+			this.letterArr = [];
+			for (let j = 0; j < this.letters.length; j++) {
+				if (this.letters[j] != " ") {
+					// wrap with span tag and  add class
+					this.wrappedLetters = `<span class='char char-${j + 1}'> ${this.letters[j]} </span> `;
+					this.letterArr.push(this.wrappedLetters);
+				} else {
+					this.wrappedLetters = `<span class='char char-space'> ${this.letters[j]} </span> `;
+					this.letterArr.push(this.wrappedLetters);
+				}
+
+				// replace words with letters in the DOM		
+				this.elArr[i].innerHTML = this.letterArr.join(' ');
 			}
 
-			// replace words with letters in the DOM		
-			arr[i].innerHTML = letterArr.join(' ');
+			this.stringArr.push(this.letterArr);
+
 		}
-
-
-
-		//console.log(letterArr);
-		stringArr.push(letterArr);
-
 	}
-	
-
-	//console.log(stringArr);
 
 }
+
+export default SplitIntoLetters;
+

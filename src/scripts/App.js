@@ -1,9 +1,11 @@
+import SplitIntoLetters from './modules/Lettering';
 import {newsApiCall} from './modules/News';
-import {splitIntoLetters} from './modules/Lettering';
 import '../css/styles.scss';
 
-newsApiCall();
-splitIntoLetters();
+const letterAnim = new SplitIntoLetters(".el");
+const newsCall = newsApiCall();
+
+
 
 
 

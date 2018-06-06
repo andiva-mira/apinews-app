@@ -11,36 +11,41 @@ module.exports = {
 		path: path.join(__dirname, '/dist'),
 		filename: '[name].[hash].js'
 	},
+	
+	devtool: 'inline-source-map',
+	devServer: {
+		contentBase: './dist'
+	},
 
 	optimization: {
-    minimizer: [
-      new UglifyJsPlugin({
-      	 uglifyOptions: {
-	      output: {
-	        comments: false,
-	        beautify: false,
-	      },
+	minimizer: [
+	  new UglifyJsPlugin({
+		 uglifyOptions: {
+		  output: {
+			comments: false,
+			beautify: false,
+		  },
 
-    	}
-      }), 
-      new OptimizeCSSAssetsPlugin({
-         assetNameRegExp: /\.css$/g,
-         cssProcessor: require('cssnano'),
-         cssProcessorOptions: { discardComments: { removeAll: true } },
-         canPrint: true
-      })
-    ]
-  	},
+		}
+	  }), 
+	  new OptimizeCSSAssetsPlugin({
+		 assetNameRegExp: /\.css$/g,
+		 cssProcessor: require('cssnano'),
+		 cssProcessorOptions: { discardComments: { removeAll: true } },
+		 canPrint: true
+	  })
+	]
+	},
 
 	plugins: [
 		new CleanWebpackPlugin('dist', {} ),
 		new HtmlWebpackPlugin({
 			template: './src/index.html'
 		}),
-	    new MiniCssExtractPlugin({
-	      filename: 'styles.[hash].css',
-	      chunkFilename: "[id].css"
-	    }),
+		new MiniCssExtractPlugin({
+		  filename: 'styles.[hash].css',
+		  chunkFilename: "[id].css"
+		}),
 	],
 
 	module: {
@@ -54,15 +59,15 @@ module.exports = {
 			},
 			{
 				test: /\.scss$/,
-        		use:  [  'style-loader', MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader']
+				use:  [  'style-loader', MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader']
 			},
 			{
-                test: /\.svg/,
-                use: {
-                    loader: 'svg-url-loader',
-                    options: {}
-                }
-            }
+				test: /\.svg/,
+				use: {
+					loader: 'svg-url-loader',
+					options: {}
+				}
+			}
 		]
 	}
 
