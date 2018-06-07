@@ -8,13 +8,13 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 module.exports = {
 	entry: ['babel-polyfill', './src/scripts/App.js'],
 	output: {
-		path: path.join(__dirname, '/dist'),
+		path: path.join(__dirname, '/docs'),
 		filename: '[name].[hash].js'
 	},
 	
 	devtool: 'inline-source-map',
 	devServer: {
-		contentBase: './dist'
+		contentBase: './docs'
 	},
 
 	optimization: {
@@ -38,7 +38,7 @@ module.exports = {
 	},
 
 	plugins: [
-		new CleanWebpackPlugin('dist', {} ),
+		new CleanWebpackPlugin('docs', {} ),
 		new HtmlWebpackPlugin({
 			template: './src/index.html'
 		}),

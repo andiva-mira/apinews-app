@@ -26,7 +26,7 @@ async function getNews(url) {
 
 		// saving the first 10 articles from every object
 		const articlesArray = jsonResponse.articles.slice(0, 10);
-		console.log(articlesArray);
+		//console.log(articlesArray);
 		return articlesArray;
 	}
 }
@@ -63,7 +63,7 @@ function renderNews(articles) {
 						${author}
 						${formatDate(article.publishedAt)}
 						${description}
-						<a href="${article.url} target="_blank" class="btn  ${isButtonOdd}"><span class="btn-text">Read More</span></a>
+						<a href="${article.url}" target="_blank" class="btn  ${isButtonOdd}"><span class="btn-text">Read More</span></a>
 					</div>
 				</div>
 				<div class="image-container">
