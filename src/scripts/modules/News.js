@@ -77,6 +77,9 @@ function renderNews(articles) {
 	return articles;
 }
 
+// display first tab content on window load
+window.onload = displayFirstTabContent();
+
 
 function displayNewsArticles(articlesArray) {
 	renderNews(articlesArray);
@@ -84,49 +87,39 @@ function displayNewsArticles(articlesArray) {
 
 
 function displayFirstTabContent() {
-// clean content
+	// clean content
 	section.innerHTML = ' ';
-
-// add active/non active classes
-	tabsArr.forEach((item, i) => {
-		if (i == 0 ) {
-			item.className = "tabs tab-is-active";
-		} else {
-			item.className = "tabs tab-is-not-active";
-		}
-	});
 	getNews(newsUrls[0]).then(displayNewsArticles);	
+
+	function events() {
+		tabsArr.forEach((tab,tabIndex) => {
+			tab.className = "tabs";
+		});
+
+		this.className = "tabs is-active";
+	}
+
+	tabsArr.forEach(tab => {
+		tab.addEventListener('click', events, false);
+	});
+
 }
 
-// display first tab content on window load
-window.onload = displayFirstTabContent();
 
-// Tabs Event Listeners
-
-tabsArr.forEach((tab, tabIndex, tabArray) => {
-	
-	tab.addEventListener("click", function(event) {
-		// const tabAttr = tab.getAttribute("data-index");
-		// console.log(tabAttr);
-		const currentTab = this;
-		newsUrls.forEach((news, newsIndex) => {
-			
+// Display news content
+tabsArr.forEach((tab, tabIndex) => {	
+	tab.addEventListener("click", function(event) {		
+		newsUrls.forEach((news, newsIndex) => {			
 			if ( newsIndex == tabIndex) {
 				// clean content
 				section.innerHTML = ' ';
-
-				// set active to current tab
-				currentTab.className = "tabs tab-is-active";
 				getNews(news).then(displayNewsArticles);
 			} 
-
-			// if (tabAttr != newsIndex) {
-			// 	tabArray[tabIndex].className = "tabs tab-is-not-active";
-			// } 
-
 		});
 
 		}, false);
 	});
 
 }
+
+

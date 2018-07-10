@@ -47,7 +47,7 @@
 
 	}
 
-	.tab-is-active {
+	.is-active {
 		background-color: $primaryA;
 		color: #fff;
 
@@ -59,9 +59,5 @@
 
 	}
 
-	.tab-is-not-active {
-		background-color: none;
-		color: inherit;
-	}
 
 }
